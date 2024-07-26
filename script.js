@@ -11,17 +11,21 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     const spouse = parseInt(document.getElementById('spouse').value);
 
     // Constants
-    const inflationRate = 0.04;
+    const inflationRate = 0.04; // 4% inflation rate
     let totalAmountNeeded = 0;
     let annualBudget = (dailyBreakfast + dailyLunch + dailyDinner) * 365;
     if (spouse === 1) annualBudget *= 2;  // If spouse is Yes (1), double the budget
 
+    // Number of years in retirement
     const yearsInRetirement = lifeExpectancy - retirementAge;
+
+    // Calculate the total amount needed accounting for inflation
     for (let year = 0; year < yearsInRetirement; year++) {
         totalAmountNeeded += annualBudget;
         annualBudget *= (1 + inflationRate);  // Adjust for inflation
     }
 
+    // Calculate savings needed
     const yearsUntilRetirement = retirementAge - currentAge;
     const annualSavingsNeeded = totalAmountNeeded / yearsUntilRetirement;
     const monthlySavingsNeeded = annualSavingsNeeded / 12;
