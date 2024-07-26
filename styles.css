@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+/* Ensure the body takes up full height */
+html, body {
+    height: 100%;
+}
+
 /* Container for centering content */
 .container {
     width: 80%;
@@ -80,12 +85,13 @@ input[type="submit"]:hover {
 
 /* Footer styling */
 .footer {
-    margin-top: 40px;
-    padding-top: 20px;
+    margin-top: auto;
+    padding: 10px;
     border-top: 1px solid #ddd;
     text-align: center;
     font-size: 14px;
     color: #666;
+    background-color: #f9f9f9;
 }
 
 .footer a {
@@ -98,4 +104,12 @@ input[type="submit"]:hover {
     text-decoration: underline;
 }
 
+/* Flexbox for body to ensure footer sticks to the bottom */
+body {
+    display: flex;
+    flex-direction: column;
+}
 
+.container {
+    flex: 1;
+}
