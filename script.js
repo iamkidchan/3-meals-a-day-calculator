@@ -1,5 +1,15 @@
 function formatNumberWithCommas(number) {
-    return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // Ensure the number is rounded to 2 decimal places
+    number = Number(number).toFixed(2);
+    
+    // Split the number into whole and decimal parts
+    let parts = number.split(".");
+    
+    // Add commas to the whole part
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+    // Join the parts back together
+    return parts.join(".");
 }
 
 document.getElementById('calculator-form').addEventListener('submit', function(event) {
@@ -33,7 +43,7 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     const monthlySavingsNeeded = annualSavingsNeeded / 12;
     const dailySavingsNeeded = annualSavingsNeeded / 365;
 
-    // Display the results with comma separators
+    // Display the results
     document.getElementById('results').innerHTML = `
         <h2>Calculation Results</h2>
         <p><strong>Assumptions:</strong></p>
