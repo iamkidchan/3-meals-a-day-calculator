@@ -1,54 +1,96 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+/* Basic reset for consistent styling across browsers */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
 }
 
+/* Ensure the body and html take up full height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Flexbox layout for body to ensure footer sticks to the bottom */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container for centering content */
 .container {
+    flex: 1;
     width: 80%;
-    margin: auto;
-    overflow: hidden;
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #f9f9f9;
 }
 
-h1, h2 {
+/* Heading styles */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
     color: #333;
 }
 
-.input-section, .output-section {
-    background: #fff;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 5px;
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-    display: block;
-    margin: 10px 0 5px;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="number"], input[type="submit"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    font-size: 14px;
 }
 
-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background: #333;
+input[type="submit"] {
+    background-color: #007bff;
     color: #fff;
-    border: none;
     cursor: pointer;
-    margin-top: 20px;
+    font-size: 16px;
+    border: none;
 }
 
-button:hover {
-    background: #555;
+input[type="submit"]:hover {
+    background-color: #0056b3;
 }
+
+/* Results section styling */
+.results {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+.results h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.results p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
 /* Footer styling */
 .footer {
     padding: 10px;
