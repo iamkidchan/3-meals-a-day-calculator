@@ -1,47 +1,35 @@
-document.getElementById('calculator-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+function formatNumber(number) {
+    return number.toLocaleString('en-US', { maximumFractionDigits: 2 });
+}
 
+function calculateRetirement() {
     // Get input values
-    const currentAge = parseInt(document.getElementById('current_age').value);
-    const retirementAge = parseInt(document.getElementById('retirement_age').value);
-    const lifeExpectancy = parseInt(document.getElementById('life_expectancy').value);
-    const dailyBreakfast = parseFloat(document.getElementById('daily_breakfast').value);
-    const dailyLunch = parseFloat(document.getElementById('daily_lunch').value);
-    const dailyDinner = parseFloat(document.getElementById('daily_dinner').value);
-    const spouse = parseInt(document.getElementById('spouse').value);
+    const currentAge = parseInt(document.getElementById('currentAge').value);
+    const retirementAge = parseInt(document.getElementById('retirementAge').value);
+    const lifeExpectancy = parseInt(document.getElementById('lifeExpectancy').value);
+    const currentIncome = parseFloat(document.getElementById('currentIncome').value);
+    const desiredIncome = parseFloat(document.getElementById('desiredIncome').value);
+    const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+    const returnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+    const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
 
-    // Constants
-    const inflationRate = 0.04; // 4% inflation rate
-    let totalAmountNeeded = 0;
-    let annualBudget = (dailyBreakfast + dailyLunch + dailyDinner) * 365;
-    if (spouse === 1) annualBudget *= 2;  // If spouse is Yes (1), double the budget
-
-    // Number of years in retirement
+    // Calculate years until retirement and years in retirement
+    const yearsUntilRetirement = retirementAge - currentAge;
     const yearsInRetirement = lifeExpectancy - retirementAge;
 
-    // Calculate the total amount needed accounting for inflation
-    for (let year = 0; year < yearsInRetirement; year++) {
-        totalAmountNeeded += annualBudget;
-        annualBudget *= (1 + inflationRate);  // Adjust for inflation
-    }
+    // Calculate total retirement savings needed
+    const realReturnRate = (1 + returnRate) / (1 + inflationRate) - 1;
+    const totalSavingsNeeded = desiredIncome * ((1 - Math.pow(1 + realReturnRate, -yearsInRetirement)) / realReturnRate);
 
-    // Calculate savings needed
-    const yearsUntilRetirement = retirementAge - currentAge;
-    const annualSavingsNeeded = totalAmountNeeded / yearsUntilRetirement;
+    // Calculate annual savings needed
+    const annualSavingsNeeded = (totalSavingsNeeded - currentSavings * Math.pow(1 + realReturnRate, yearsUntilRetirement)) /
+        ((1 - Math.pow(1 + realReturnRate, -yearsUntilRetirement)) / realReturnRate);
+
+    // Calculate monthly savings needed
     const monthlySavingsNeeded = annualSavingsNeeded / 12;
-    const dailySavingsNeeded = annualSavingsNeeded / 365;
 
-    // Display the results
-    document.getElementById('results').innerHTML = `
-        <h2>Calculation Results</h2>
-        <p><strong>Assumptions:</strong></p>
-        <ul>
-            <li>Inflation Rate: 4% per annum</li>
-            <li>Spouse: ${spouse === 1 ? 'Yes' : 'No'}</li>
-        </ul>
-        <p><strong>Total Amount Needed:</strong> RM${totalAmountNeeded.toFixed(2)}</p>
-        <p><strong>Annual Savings Needed:</strong> RM${annualSavingsNeeded.toFixed(2)}</p>
-        <p><strong>Monthly Savings Needed:</strong> RM${monthlySavingsNeeded.toFixed(2)}</p>
-        <p><strong>Daily Savings Needed:</strong> RM${dailySavingsNeeded.toFixed(2)}</p>
-    `;
-});
+    // Update the result spans with formatted numbers
+    document.getElementById('totalSavings').textContent = '$' + formatNumber(totalSavingsNeeded);
+    document.getElementById('annualSavings').textContent = '$' + formatNumber(annualSavingsNeeded);
+    document.getElementById('monthlySavings').textContent = '$' + formatNumber(monthlySavingsNeeded);
+}
