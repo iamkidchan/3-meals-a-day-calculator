@@ -1,3 +1,6 @@
+function formatNumberWithCommas(number) {
+    return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 document.getElementById('calculator-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
