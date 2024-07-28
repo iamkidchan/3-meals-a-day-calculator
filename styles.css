@@ -23,7 +23,7 @@ body {
     width: 80%;
     max-width: 800px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 10px 20px 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     background-color: #f9f9f9;
@@ -32,8 +32,33 @@ body {
 /* Heading styles */
 h1 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #333;
+}
+
+/* Intro section styling */
+.intro {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.intro p {
+    margin-bottom: 10px;
+}
+
+.intro a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.intro a:hover {
+    text-decoration: underline;
 }
 
 /* Form styling */
@@ -89,24 +114,4 @@ input[type="submit"]:hover {
     font-size: 16px;
     margin-bottom: 10px;
     color: #333;
-}
-
-/* Footer styling */
-.footer {
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-    background-color: #f9f9f9;
-}
-
-.footer a {
-    color: #007bff;
-    text-decoration: none;
-    margin: 0 5px;
-}
-
-.footer a:hover {
-    text-decoration: underline;
 }
