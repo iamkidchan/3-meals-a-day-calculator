@@ -1,10 +1,9 @@
 function formatNumberWithCommas(number) {
     return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
 document.getElementById('calculator-form').addEventListener('submit', function(event) {
     event.preventDefault();
-    
+
     // Get input values
     const currentAge = parseInt(document.getElementById('current_age').value);
     const retirementAge = parseInt(document.getElementById('retirement_age').value);
@@ -21,11 +20,9 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     if (spouse === 1) annualBudget *= 2;  // If spouse is Yes (1), double the budget
 
     const yearsInRetirement = lifeExpectancy - retirementAge;
-    let currentAnnualBudget = annualBudget;
-
     for (let year = 0; year < yearsInRetirement; year++) {
-        totalAmountNeeded += currentAnnualBudget;
-        currentAnnualBudget *= (1 + inflationRate);  // Adjust for inflation
+        totalAmountNeeded += annualBudget;
+        annualBudget *= (1 + inflationRate);  // Adjust for inflation
     }
 
     const yearsUntilRetirement = retirementAge - currentAge;
@@ -33,7 +30,7 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     const monthlySavingsNeeded = annualSavingsNeeded / 12;
     const dailySavingsNeeded = annualSavingsNeeded / 365;
 
-    // Display the results with comma separators
+    // Display the results
     document.getElementById('results').innerHTML = `
         <h2>Calculation Results</h2>
         <p><strong>Assumptions:</strong></p>
@@ -41,14 +38,9 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
             <li>Inflation Rate: 4% per annum</li>
             <li>Spouse: ${spouse === 1 ? 'Yes' : 'No'}</li>
         </ul>
-        <p><strong>Total Amount Needed:</strong> RM${formatNumberWithCommas(totalAmountNeeded)}</p>
-        <p><strong>Annual Savings Needed:</strong> RM${formatNumberWithCommas(annualSavingsNeeded)}</p>
-        <p><strong>Monthly Savings Needed:</strong> RM${formatNumberWithCommas(monthlySavingsNeeded)}</p>
-        <p><strong>Daily Savings Needed:</strong> RM${formatNumberWithCommas(dailySavingsNeeded)}</p>
+        <p><strong>Total Amount Needed:</strong> RM${totalAmountNeeded.toFixed(2)}</p>
+        <p><strong>Annual Savings Needed:</strong> RM${annualSavingsNeeded.toFixed(2)}</p>
+        <p><strong>Monthly Savings Needed:</strong> RM${monthlySavingsNeeded.toFixed(2)}</p>
+        <p><strong>Daily Savings Needed:</strong> RM${dailySavingsNeeded.toFixed(2)}</p>
     `;
-
-    console.log("Total Amount Needed:", formatNumberWithCommas(totalAmountNeeded));
-    console.log("Annual Savings Needed:", formatNumberWithCommas(annualSavingsNeeded));
-    console.log("Monthly Savings Needed:", formatNumberWithCommas(monthlySavingsNeeded));
-    console.log("Daily Savings Needed:", formatNumberWithCommas(dailySavingsNeeded));
 });
