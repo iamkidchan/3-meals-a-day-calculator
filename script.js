@@ -33,7 +33,7 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     const monthlySavingsNeeded = annualSavingsNeeded / 12;
     const dailySavingsNeeded = annualSavingsNeeded / 365;
 
-    // Display the results with comma-separated numbers
+    // Display the results with comma separators
     document.getElementById('results').innerHTML = `
         <h2>Calculation Results</h2>
         <p><strong>Assumptions:</strong></p>
@@ -47,8 +47,8 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
         <p><strong>Daily Savings Needed:</strong> RM${formatNumberWithCommas(dailySavingsNeeded)}</p>
     `;
 
-    console.log("Total Amount Needed:", totalAmountNeeded);
-    console.log("Annual Savings Needed:", annualSavingsNeeded);
-    console.log("Monthly Savings Needed:", monthlySavingsNeeded);
-    console.log("Daily Savings Needed:", dailySavingsNeeded);
+    console.log("Total Amount Needed:", formatNumberWithCommas(totalAmountNeeded));
+    console.log("Annual Savings Needed:", formatNumberWithCommas(annualSavingsNeeded));
+    console.log("Monthly Savings Needed:", formatNumberWithCommas(monthlySavingsNeeded));
+    console.log("Daily Savings Needed:", formatNumberWithCommas(dailySavingsNeeded));
 });
